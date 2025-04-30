@@ -3,9 +3,12 @@ import { formatCurrency } from '@/lib/formtter'
 import Image from 'next/image'
 import React from 'react'
 import AddToCartButton from './AddToCartButton'
+// import { Products } from '@/generated/prisma'
+import { ProductWithrelation } from '@/types/product'
 
-export default function Menu({items}:{items:any}) {
-  return (
+export default function Menu({items}:{items:ProductWithrelation[]}) {
+  
+  return items.length>0?(
     <div>
     <ul className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
       {items.map((item) => (
@@ -29,5 +32,5 @@ export default function Menu({items}:{items:any}) {
       ))}
     </ul>
   </div>
-  )
+  ):<p className='text-center p-5'> No Products Found</p>
 }

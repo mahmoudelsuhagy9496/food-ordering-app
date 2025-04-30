@@ -1,17 +1,16 @@
-import { db } from "@/lib/prisma";
+import About from "@/components/about";
 import BestSellers from "./_components/BestSellers";
 import Hero from "./_components/Hero";
+import Contact from "@/components/contact";
 
-export default async function Home() {
-  console.log("iam in server side ");
-  const products = await db.products.findMany()
-  console.log(products);
-  
-    
+export default  function Home() {
+
   return (
     <main>
       <Hero />
       <BestSellers />
+      <About />
+      <Contact />
       <div className="py-40"></div>
     </main>
   );

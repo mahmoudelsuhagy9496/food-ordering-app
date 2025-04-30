@@ -117,6 +117,21 @@ exports.Prisma.TransactionIsolationLevel = makeStrictEnum({
   Serializable: 'Serializable'
 });
 
+exports.Prisma.UserScalarFieldEnum = {
+  id: 'id',
+  email: 'email',
+  password: 'password',
+  name: 'name',
+  image: 'image',
+  phone: 'phone',
+  streetAddress: 'streetAddress',
+  postalCode: 'postalCode',
+  city: 'city',
+  country: 'country',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
 exports.Prisma.ProductsScalarFieldEnum = {
   id: 'id',
   name: 'name',
@@ -125,7 +140,52 @@ exports.Prisma.ProductsScalarFieldEnum = {
   order: 'order',
   basePrice: 'basePrice',
   createdAt: 'createdAt',
-  updateAt: 'updateAt'
+  updateAt: 'updateAt',
+  categoryId: 'categoryId'
+};
+
+exports.Prisma.OrderScalarFieldEnum = {
+  id: 'id',
+  paid: 'paid',
+  subTotal: 'subTotal',
+  deliveryFee: 'deliveryFee',
+  totalPrice: 'totalPrice',
+  userEmail: 'userEmail',
+  phone: 'phone',
+  streetAddress: 'streetAddress',
+  postalCode: 'postalCode',
+  city: 'city',
+  country: 'country',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.OrderProductScalarFieldEnum = {
+  id: 'id',
+  quantity: 'quantity',
+  orderId: 'orderId',
+  userId: 'userId',
+  productId: 'productId'
+};
+
+exports.Prisma.SizeScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  price: 'price',
+  productId: 'productId'
+};
+
+exports.Prisma.ExtraScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  price: 'price',
+  productId: 'productId'
+};
+
+exports.Prisma.CategoryScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  order: 'order'
 };
 
 exports.Prisma.SortOrder = {
@@ -138,9 +198,32 @@ exports.Prisma.QueryMode = {
   insensitive: 'insensitive'
 };
 
+exports.Prisma.NullsOrder = {
+  first: 'first',
+  last: 'last'
+};
+exports.ProductsSizes = exports.$Enums.ProductsSizes = {
+  SMALL: 'SMALL',
+  MEDIUM: 'MEDIUM',
+  LARGE: 'LARGE'
+};
+
+exports.ProductsExtras = exports.$Enums.ProductsExtras = {
+  CHEESE: 'CHEESE',
+  BACON: 'BACON',
+  TOMATO: 'TOMATO',
+  ONION: 'ONION',
+  PEPPER: 'PEPPER'
+};
 
 exports.Prisma.ModelName = {
-  Products: 'Products'
+  User: 'User',
+  Products: 'Products',
+  Order: 'Order',
+  OrderProduct: 'OrderProduct',
+  Size: 'Size',
+  Extra: 'Extra',
+  Category: 'Category'
 };
 
 /**

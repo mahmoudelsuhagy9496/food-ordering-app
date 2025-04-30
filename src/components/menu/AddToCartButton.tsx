@@ -14,18 +14,12 @@ import {
 } from "@/components/ui/dialog";
 import { formatCurrency } from "@/lib/formtter";
 import { Checkbox } from "../ui/checkbox";
+// import { Extra, Products, Size } from "@/generated/prisma";
+import { ProductWithrelation } from "@/types/product";
+import { Extra, Size } from "@/generated/prisma";
 
-export default function AddToCartButton({ item }: { item: any }) {
-  const sizes=[
-    {id:crypto.randomUUID(),name:"Small",price:0},
-    {id:crypto.randomUUID(),name:"Medium,",price:4},
-    {id:crypto.randomUUID(),name:"Large",price:6},
-  ]
-  const extra=[
-    {id:crypto.randomUUID(),name:"tomato",price:2},
-    {id:crypto.randomUUID(),name:"onion,",price:1.5},
-    {id:crypto.randomUUID(),name:"cheese",price:1.5},
-  ]
+export default function AddToCartButton({ item }: { item: ProductWithrelation }) {
+  
  
   return (
     <>
@@ -58,11 +52,11 @@ export default function AddToCartButton({ item }: { item: any }) {
           <div className=" space-y-10 py-10">
             <div className="space-y-10 text-center">
               <Label htmlFor="pick-size " className=" text-[22px] justify-center">Pick Your Size</Label>
-              <Pick sizes={sizes} item={item}/>
+              <Pick sizes={item.sizes} item={item}/>
             </div>
             <div className="space-y-10 text-center">
               <Label htmlFor="Extra " className="text-[22px] justify-center">Any Extra?</Label>
-              <Extra extra={extra} />
+              <ExtraAny extra={item.extras} />
             </div>
           </div>
           <DialogFooter>
@@ -76,14 +70,14 @@ export default function AddToCartButton({ item }: { item: any }) {
   );
 }
 
-function Pick({sizes,item}:{sizes:any,item:any}) {
+function Pick({sizes,item}:{sizes:Size[],item:ProductWithrelation}) {
   return (
     <RadioGroup defaultValue="0" className="space-y-2">
 
-    {sizes.map((size:any)=>(
+    {sizes.map((size:Size)=>(
       <div key={size.id} className="flex items-center space-y-2 rounded-md border border-gray-300 p-1  ">
-        <RadioGroupItem  value={size.price} id={size.id} />
-        <Label htmlFor={size.i} className="px-2 uppercase font-normal text-[16px] ">{size.name} {formatCurrency(size.price + item.basePrice)}</Label>
+        <RadioGroupItem  value={size.id} id={size.id} />
+        <Label htmlFor={size.id} className="px-2 uppercase font-normal text-[16px] ">{size.name} {formatCurrency(size.price + item.basePrice)}</Label>
       </div>
 
     ))}
@@ -92,12 +86,12 @@ function Pick({sizes,item}:{sizes:any,item:any}) {
     </RadioGroup>
   );
 }
-function Extra({extra}:{extra:any}) {
+function ExtraAny({extra}:{extra:Extra[]}) {
   return (
     <div className=" text-start space-y-2">
-      {extra.map((item:any)=>(
+      {extra.map((item:Extra)=>(
         <div key={item.id} className="rounded-md border border-gray-300 p-1  ">
-        <Checkbox id={item}  />
+        <Checkbox id={item.id}  />
       <label
       
         htmlFor={item.id}
