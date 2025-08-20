@@ -5,9 +5,12 @@ import React from 'react'
 import AddToCartButton from './AddToCartButton'
 // import { Products } from '@/generated/prisma'
 import { ProductWithrelation } from '@/types/product'
+import { getCurrentLocale } from '@/lib/getCurrentLocale'
+import getTrans from '@/lib/translation'
 
-export default function Menu({items}:{items:ProductWithrelation[]}) {
-  
+export default async function Menu({items}:{items:ProductWithrelation[]}) {
+   const locale = await getCurrentLocale();
+    const { noProductsFound } = await getTrans(locale);
   return items.length>0?(
     <div>
     <ul className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
@@ -32,5 +35,5 @@ export default function Menu({items}:{items:ProductWithrelation[]}) {
       ))}
     </ul>
   </div>
-  ):<p className='text-center p-5'> No Products Found</p>
+  ):<p className='text-center p-5'> {noProductsFound}</p>
 }

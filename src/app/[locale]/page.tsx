@@ -1,10 +1,9 @@
 import About from "@/components/about";
-
 import Contact from "@/components/contact";
 import Hero from "./_components/Hero";
 import BestSellers from "./_components/BestSellers";
 
-export default function Home() {
+export default async function Home() {
   return (
     <main>
       <Hero />

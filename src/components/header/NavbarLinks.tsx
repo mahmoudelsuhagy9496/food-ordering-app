@@ -4,14 +4,18 @@ import Link from "../link";
 import { Button, buttonVariants } from "../ui/button";
 import { useState } from "react";
 import { Menu, XIcon } from "lucide-react";
+import { useParams, usePathname } from "next/navigation";
 
-function NavbarLinks() {
+function NavbarLinks({translation}:{translation:{[key:string]:string}}) {
   const links = [
-    { id: 1, title: "Menu", href: Routes.MENU },
-    { id: 2, title: "About", href: Routes.ABOUT },
-    { id: 3, title: "Contact", href: Routes.CONTACT },
-    { id: 4, title: "login", href: `${Routes.AUTH}/${Pages.LOGIN}` },
+    { id: 1, title: translation.menu, href: Routes.MENU },
+    { id: 2, title: translation.about, href: Routes.ABOUT },
+    { id: 3, title: translation.contact, href: Routes.CONTACT },
+    { id: 4, title: translation.login, href: `${Routes.AUTH}/${Pages.LOGIN}` },
   ];
+  const {locale}=useParams()
+  const pathname=usePathname()
+  
   const [openMnue, setOpenMnue] = useState(false);
   return (
     <nav className=" flex flex-1 justify-end">
@@ -42,13 +46,13 @@ function NavbarLinks() {
         {links.map((link) => (
           <li key={link.id}>
             <Link
-              href={`/${link.href}`}
+              href={`/${locale}/${link.href}`}
               className={`
                 ${
                   link.href === `${Routes.AUTH}/${Pages.LOGIN}`
                     ? `${buttonVariants({ size: "lg" })} !px-8 !rounded-full`
-                    : "hover:text-primary duration-200 transition-colors   text-accent"
-                } font-semibold
+                    : "hover:text-primary duration-200 transition-colors   "
+                } font-semibold ${pathname.startsWith(`/${locale}/${link.href}`)?`text-primary`:`text-accent`}
                  `}
             >
               {link.title}
