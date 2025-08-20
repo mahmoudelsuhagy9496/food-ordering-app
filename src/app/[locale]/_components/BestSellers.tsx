@@ -3,7 +3,6 @@ import Menu from "@/components/menu";
 import { getBestSellers } from "@/server/db/product";
 
 export default async function BestSellers() {
-  console.log("iam in server side ");
   const BestSellers = await getBestSellers(3);
 
   console.log(BestSellers);

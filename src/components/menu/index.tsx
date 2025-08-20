@@ -1,4 +1,4 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
+ 
 import { formatCurrency } from '@/lib/formtter'
 import Image from 'next/image'
 import React from 'react'

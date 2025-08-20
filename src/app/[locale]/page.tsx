@@ -1,10 +1,10 @@
 import About from "@/components/about";
-import BestSellers from "./_components/BestSellers";
-import Hero from "./_components/Hero";
+
 import Contact from "@/components/contact";
+import Hero from "./_components/Hero";
+import BestSellers from "./_components/BestSellers";
 
-export default  function Home() {
-
+export default function Home() {
   return (
     <main>
       <Hero />

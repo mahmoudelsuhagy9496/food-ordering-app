@@ -2,15 +2,13 @@ import type { Metadata } from "next";
 import { Roboto } from "next/font/google";
 import "./globals.css";
 import Header from "@/components/header";
+import ReduxProvider from "@/providers/ReduxProvider";
 
 const roboto = Roboto({
   subsets: ["latin"],
-  weight:["400","500","700"],
-  preload:true,
-
+  weight: ["400", "500", "700"],
+  preload: true,
 });
-
-
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -24,11 +22,11 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body
-        className={roboto.className}
-      >
-        <Header />
-        {children}
+      <body className={roboto.className}>
+        <ReduxProvider>
+          <Header />
+          {children}
+        </ReduxProvider>
       </body>
     </html>
   );
