@@ -1,12 +1,19 @@
 import type { Metadata } from "next";
-import { Roboto } from "next/font/google";
+import { Cairo, Roboto } from "next/font/google";
 import "./globals.css";
 import Header from "@/components/header";
 import ReduxProvider from "@/providers/ReduxProvider";
 import { Locale } from "@/i18n.config";
 import {Languages, Directions } from "@/constants/enums";
+import { Toaster } from "@/components/ui/sonner";
+import NextAuthSessionProvider from "@/providers/NextAuthSessionProvider";
 
 const roboto = Roboto({
+  subsets: ["latin"],
+  weight: ["400", "500", "700"],
+  preload: true,
+});
+const cairo = Cairo({
   subsets: ["latin"],
   weight: ["400", "500", "700"],
   preload: true,
@@ -27,11 +34,14 @@ export default async function RootLayout({
   const locale=(await params).locale
   return (
     <html lang={locale} dir={locale===Languages.ARABIC?Directions.RTL:Directions.LTR}>
-      <body className={roboto.className}>
+      <body className={locale===Languages.ARABIC?cairo.className:roboto.className}>
+        <NextAuthSessionProvider>
         <ReduxProvider>
           <Header />
           {children}
+          <Toaster />
         </ReduxProvider>
+        </NextAuthSessionProvider>
       </body>
     </html>
   );

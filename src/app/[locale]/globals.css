@@ -119,4 +119,7 @@
   .section-gap{
     @apply my-8 md:my-16;
   }
+  .element-center{
+    @apply flex justify-center items-center
+  }
 }
